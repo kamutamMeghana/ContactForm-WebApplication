@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication2.Models;
+namespace ContactForm.Models;
 
 public partial class BestStoreContext : DbContext
 {

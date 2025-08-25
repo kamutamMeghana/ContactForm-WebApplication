@@ -1,5 +1,4 @@
-﻿@model ContactDto
-
+﻿@model ContactForm.Models.ContactDto
 <div class="row">
     <div class="col-lg-9 mx-auto rounded border p-4 shadow">
         <h2 class="text-center mb-3">Contact Form</h2>
@@ -52,8 +51,16 @@
 
             <div class="row mb-3">
                 <div class="offset-sm-4 col-sm-8 d-flex gap-2">
-                    <button type="submit" formaction="/Contact/Create" class="btn btn-success">Create</button>
-                    <button type="submit" formaction="/Contact/Edit" class="btn btn-warning">Update</button>
+                    @if (Model.uniqueid == 0)
+                    {
+                        <!-- New record -->
+                        <button type="submit" formaction="/Contact/Create" class="btn btn-success">Create</button>
+                    }
+                    else
+                    {
+                        <!-- Existing record -->
+                        <button type="submit" formaction="/Contact/Edit" class="btn btn-warning">Update</button>
+                    }
                 </div>
             </div>
         </form>
@@ -72,7 +79,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var c in ViewBag.Contacts as List<WebApplication2.Models.Contact>)
+                @foreach (var c in ViewBag.Contacts as List<ContactForm.Models.Contact>)
                 {
                     <tr>
                         <td>@c.Firstname</td>

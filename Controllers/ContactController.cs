@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
+using ContactForm.Models;
 
 public class ContactController : Controller
 {

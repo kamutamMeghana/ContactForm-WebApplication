@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
+using ContactForm.Models;
 
-namespace WebApplication2.Controllers
+namespace ContactForm.Controllers
 {
     public class HomeController : Controller
     {

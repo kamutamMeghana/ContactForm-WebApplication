@@ -1,4 +1,4 @@
-namespace WebApplication2.Models
+namespace ContactForm.Models
 {
     public class ErrorViewModel
     {
