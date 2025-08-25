@@ -1,0 +1,101 @@
+﻿@model ContactDto
+
+<div class="row">
+    <div class="col-lg-9 mx-auto rounded border p-4 shadow">
+        <h2 class="text-center mb-3">Contact Form</h2>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["SuccessMessage"]</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <form method="post">
+            <input type="hidden" asp-for="uniqueid" />
+
+            <!-- Validation summary -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">First Name*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Last Name*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Email*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Message*</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" asp-for="Message"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="offset-sm-4 col-sm-8 d-flex gap-2">
+                    <button type="submit" formaction="/Contact/Create" class="btn btn-success">Create</button>
+                    <button type="submit" formaction="/Contact/Edit" class="btn btn-warning">Update</button>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+
+        <h3 class="mt-4">Contacts List</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>First</th>
+                    <th>Last</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in ViewBag.Contacts as List<WebApplication2.Models.Contact>)
+                {
+                    <tr>
+                        <td>@c.Firstname</td>
+                        <td>@c.Lastname</td>
+                        <td>@c.Email</td>
+                        <td>@c.Message</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@c.Uniqueid" class="btn btn-sm btn-warning">Edit</a>
+                            <form asp-action="Delete" method="post" style="display:inline">
+                                <input type="hidden" name="uniqueid" value="@c.Uniqueid" />
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this contact?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Validation Scripts -->
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
